@@ -1,20 +1,99 @@
+/* Color scheme */
+:root {
+    --primary-color: #333;
+    --secondary-color: #555;
+    --background-color: #f9f9f9;
+    --accent-color: #007BFF;
+}
+
+/* General styles */
 body {
-    font-family: Helvetica, Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--primary-color);
     margin: 0;
     padding: 0;
 }
+
+/* Header and footer */
 header, footer {
-    background-color: #ddd;
+    background-color: var(--primary-color);
+    color: #fff;
     text-align: center;
     padding: 1rem;
 }
-nav a {
-    margin: 0 1rem;
-    text-decoration: none;
-    color: #333;
+
+header h1, footer p {
+    margin: 0;
 }
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: var(--accent-color);
+    border-radius: 5px;
+}
+
+nav a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* Main content */
 main {
     padding: 2rem;
+}
+
+/* Post card */
+.post-card {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    background-color: #fff;
+}
+
+.post-card:hover {
+    background-color: #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-card h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/* Featured projects */
+section {
+    margin-bottom: 2rem;
+}
+
+section h2 {
+    font-size: 1.5em;
+    margin-bottom: 1rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 1rem;
+}
+
+footer p {
+    margin: 0.5rem 0;
 }
