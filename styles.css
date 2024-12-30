@@ -97,3 +97,44 @@ li {
 footer p {
     margin: 0.5rem 0;
 }
+/* Highlight for errors */
+.highlight-error {
+    color: red;
+    font-weight: bold;
+}
+
+/* Code block styling */
+.code-block {
+    position: relative;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    overflow: auto;
+}
+
+.code-block pre {
+    margin: 0;
+    font-family: 'Courier New', Courier, monospace;
+    background: none;
+    color: var(--primary-color);
+}
+
+.copy-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--accent-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+
+.copy-button:hover {
+    background: #0056b3;
+}
