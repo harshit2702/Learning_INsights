@@ -3,51 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intro to Deep Learning</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="A blog documenting my journey of learning and building cool projects.">
+    <meta name="keywords" content="blog, learning, projects, development">
+    <title>Post 2 - My Learning Blog</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <script src="../scripts.js"></script>
 </head>
 <body>
     <header>
-        <h1>Intro to Deep Learning</h1>
+        <img src="../favicon.ico" alt="My Learning Blog Logo" style="height: 50px; position: absolute; top: 10px; left: 10px;">
+        <h1>My Learning INsights</h1>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="../blog/index.html" class="active">Blog</a>
+            <a href="../projects/index.html">Projects</a>
+        </nav>
     </header>
     <main>
         <section>
-            <h2>Overview</h2>
+            <h2>Introduction to Deep Learning</h2>
+            <p><strong>Date:</strong> December 30, 2024</p>
             <p>
-                Language translation, image recognition, and game playing are just a few areas where deep learning has exceeded human performance.
-                At its core, deep learning involves a deep stack of computations, referred to as a <strong>neural network</strong>. 
-                The basic unit of a neural network is a <strong>neuron</strong>, which performs a single computation. 
-                The network structure includes:
+                Language translation, image recognition, and game playing are just a few areas where deep learning has surpassed human performance. At its core, deep learning involves a deep stack of computations, commonly referred to as a neural network.
+            </p>
+            <p>
+                The basic unit of a neural network is a <strong>neuron</strong>, which performs a single computation. A neural network consists of:
             </p>
             <ul>
                 <li>Input Layer</li>
                 <li>Hidden Layer(s)</li>
                 <li>Output Layer</li>
             </ul>
-            <p><span class="highlight-error">Error:</span> Correct "deep learning has exceeds" to "deep learning has exceeded."</p>
+            <p>Each neuron takes input from the previous layer (except the input layer).</p>
         </section>
 
         <section>
             <h2>Linear Unit in Keras</h2>
             <div class="code-block">
-                <button class="copy-button">Copy Code</button>
-                <pre><code>from tensorflow import keras
+                <pre><code id="code1">from tensorflow import keras
 from tensorflow.keras import layers
 
 # Create a network with 1 linear unit
 model = keras.Sequential([
     layers.Dense(units=1, input_shape=[3])
 ])</code></pre>
+                <button class="copy-button" onclick="copyToClipboard(document.getElementById('code1').innerText)">Copy</button>
             </div>
-            <p><strong>Note:</strong> <code>units</code> defines how many outputs we want.</p>
+            <p>Here, <code>units</code> defines how many outputs we want.</p>
         </section>
 
         <section>
             <h2>Activation Functions</h2>
-            <p>To model non-linear relationships, we use activation functions like <strong>ReLU</strong>:</p>
+            <p>To achieve non-linear relationships, we use activation functions such as ReLU:</p>
             <div class="code-block">
-                <button class="copy-button">Copy Code</button>
-                <pre><code>from tensorflow import keras
+                <pre><code id="code2">from tensorflow import keras
 from tensorflow.keras import layers
 
 model = keras.Sequential([
@@ -55,20 +65,22 @@ model = keras.Sequential([
     layers.Dense(units=3, activation='relu'),
     layers.Dense(units=1), # Linear output layer
 ])</code></pre>
+                <button class="copy-button" onclick="copyToClipboard(document.getElementById('code2').innerText)">Copy</button>
             </div>
-            <p><span class="highlight-error">Note:</span> Add clarification on why the output layer doesn’t need an activation function.</p>
+            <p>Note: The output layer doesn’t need an activation function.</p>
         </section>
 
         <section>
             <h2>Training the Neural Network</h2>
-            <p>Alongside training data, a neural network requires:</p>
+            <p>
+                A neural network needs to learn using training data. To do so, it requires:
+            </p>
             <ul>
                 <li><strong>Loss Function:</strong> Measures prediction accuracy (e.g., MAE, MSE, Huber Loss).</li>
                 <li><strong>Optimizer:</strong> Adjusts weights to minimize the loss (e.g., SGD, Adam).</li>
             </ul>
             <div class="code-block">
-                <button class="copy-button">Copy Code</button>
-                <pre><code>model.compile(
+                <pre><code id="code3">model.compile(
     optimizer="adam",
     loss="mae",
 )
@@ -79,11 +91,117 @@ history = model.fit(
     batch_size=256,
     epochs=10,
 )</code></pre>
+                <button class="copy-button" onclick="copyToClipboard(document.getElementById('code3').innerText)">Copy</button>
+            </div>
+        </section>
+
+        <section>
+            <h2>Underfitting and Overfitting</h2>
+            <p>
+                <strong>Underfitting:</strong> High training error.  
+                <strong>Overfitting:</strong> Low training error but high error on unseen data.
+            </p>
+            <p>
+                To increase model capacity:
+            </p>
+            <ul>
+                <li><strong>Wider Model:</strong> Add more neurons per layer.</li>
+                <li><strong>Deeper Model:</strong> Add more layers.</li>
+            </ul>
+            <div class="code-block">
+                <pre><code id="code4"># Wider Model
+wider = keras.Sequential([
+    layers.Dense(32, activation='relu'),
+    layers.Dense(1),
+])
+
+# Deeper Model
+deeper = keras.Sequential([
+    layers.Dense(16, activation='relu'),
+    layers.Dense(16, activation='relu'),
+    layers.Dense(1),
+])</code></pre>
+                <button class="copy-button" onclick="copyToClipboard(document.getElementById('code4').innerText)">Copy</button>
+            </div>
+        </section>
+
+        <section>
+            <h2>Techniques to Improve Training</h2>
+            <ul>
+                <li><strong>Early Stopping:</strong> Stop training when performance stops improving.</li>
+                <div class="code-block">
+                    <pre><code id="code5">from tensorflow.keras.callbacks import EarlyStopping
+
+early_stopping = EarlyStopping(
+    min_delta=0.001,
+    patience=20,
+    restore_best_weights=True,
+)</code></pre>
+                    <button class="copy-button" onclick="copyToClipboard(document.getElementById('code5').innerText)">Copy</button>
+                </div>
+                <li><strong>Dropout:</strong> Prevents overfitting by randomly dropping connections.</li>
+                <li><strong>Batch Normalization:</strong> Improves stability and speed of training.</li>
+                <div class="code-block">
+                    <pre><code id="code6">from tensorflow.keras import layers
+
+model = keras.Sequential([
+    layers.Dense(1024, activation='relu', input_shape=[11]),
+    layers.Dropout(0.3),
+    layers.BatchNormalization(),
+    layers.Dense(1),
+])</code></pre>
+                    <button class="copy-button" onclick="copyToClipboard(document.getElementById('code6').innerText)">Copy</button>
+                </div>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Binary Classification</h2>
+            <p>
+                For binary classification, use a sigmoid activation function in the output layer and binary crossentropy as the loss function.
+            </p>
+            <div class="code-block">
+                <pre><code id="code7">from tensorflow import keras
+from tensorflow.keras import layers
+
+model = keras.Sequential([
+    layers.Dense(4, activation='relu', input_shape=[33]),
+    layers.Dense(4, activation='relu'),
+    layers.Dense(1, activation='sigmoid'),
+])
+
+model.compile(
+    optimizer='adam',
+    loss='binary_crossentropy',
+    metrics=['binary_accuracy'],
+)
+
+early_stopping = keras.callbacks.EarlyStopping(
+    patience=10,
+    min_delta=0.001,
+    restore_best_weights=True,
+)
+
+history = model.fit(
+    X_train, y_train,
+    validation_data=(X_valid, y_valid),
+    batch_size=512,
+    epochs=1000,
+    callbacks=[early_stopping],
+    verbose=0,
+)</code></pre>
+                <button class="copy-button" onclick="copyToClipboard(document.getElementById('code7').innerText)">Copy</button>
             </div>
         </section>
     </main>
     <footer>
         <p>&copy; 2024 My Learning Blog</p>
+        <div class="share-buttons">
+            <p>Share this post:</p>
+            <a href="https://twitter.com/intent/tweet?url=https://your-username.github.io/my-blog/blog/post1.html&text=Check%20out%20this%20blog%20post!" target="_blank">Share on Twitter</a>
+            <a href="https://www.linkedin.com/shareArticle?url=https://your-username.github.io/my-blog/blog/post1.html" target="_blank">Share on LinkedIn</a>
+            <a href="mailto:?subject=Check%20out%20this%20blog%20post&body=https://your-username.github.io/my-blog/blog/post1.html" target="_blank">Share via Email</a>
+        </div>        
     </footer>
 </body>
 </html>

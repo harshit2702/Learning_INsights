@@ -47,3 +47,11 @@ document.querySelectorAll('nav a').forEach(anchor => {
         });
     });
 });
+
+function copyToClipboard(code) {
+    navigator.clipboard.writeText(code).then(function() {
+        alert('Code copied to clipboard!');
+    }, function(err) {
+        alert('Failed to copy code: ', err);
+    });
+}
