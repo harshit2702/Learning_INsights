@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro to Deep Learning</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Intro to Deep Learning</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Overview</h2>
+            <p>
+                Language translation, image recognition, and game playing are just a few areas where deep learning has exceeded human performance.
+                At its core, deep learning involves a deep stack of computations, referred to as a <strong>neural network</strong>. 
+                The basic unit of a neural network is a <strong>neuron</strong>, which performs a single computation. 
+                The network structure includes:
+            </p>
+            <ul>
+                <li>Input Layer</li>
+                <li>Hidden Layer(s)</li>
+                <li>Output Layer</li>
+            </ul>
+            <p><span class="highlight-error">Error:</span> Correct "deep learning has exceeds" to "deep learning has exceeded."</p>
+        </section>
+
+        <section>
+            <h2>Linear Unit in Keras</h2>
+            <div class="code-block">
+                <button class="copy-button">Copy Code</button>
+                <pre><code>from tensorflow import keras
+from tensorflow.keras import layers
+
+# Create a network with 1 linear unit
+model = keras.Sequential([
+    layers.Dense(units=1, input_shape=[3])
+])</code></pre>
+            </div>
+            <p><strong>Note:</strong> <code>units</code> defines how many outputs we want.</p>
+        </section>
+
+        <section>
+            <h2>Activation Functions</h2>
+            <p>To model non-linear relationships, we use activation functions like <strong>ReLU</strong>:</p>
+            <div class="code-block">
+                <button class="copy-button">Copy Code</button>
+                <pre><code>from tensorflow import keras
+from tensorflow.keras import layers
+
+model = keras.Sequential([
+    layers.Dense(units=4, activation='relu', input_shape=[2]),
+    layers.Dense(units=3, activation='relu'),
+    layers.Dense(units=1), # Linear output layer
+])</code></pre>
+            </div>
+            <p><span class="highlight-error">Note:</span> Add clarification on why the output layer doesn’t need an activation function.</p>
+        </section>
+
+        <section>
+            <h2>Training the Neural Network</h2>
+            <p>Alongside training data, a neural network requires:</p>
+            <ul>
+                <li><strong>Loss Function:</strong> Measures prediction accuracy (e.g., MAE, MSE, Huber Loss).</li>
+                <li><strong>Optimizer:</strong> Adjusts weights to minimize the loss (e.g., SGD, Adam).</li>
+            </ul>
+            <div class="code-block">
+                <button class="copy-button">Copy Code</button>
+                <pre><code>model.compile(
+    optimizer="adam",
+    loss="mae",
+)
+
+history = model.fit(
+    X_train, y_train,
+    validation_data=(X_valid, y_valid),
+    batch_size=256,
+    epochs=10,
+)</code></pre>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Learning Blog</p>
+    </footer>
+</body>
+</html>
